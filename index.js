@@ -22,11 +22,13 @@ class Sprite {
 
   update() {
     this.draw();
-    this.velocity.y += gravity;
+    /* this.velocity.y += gravity; */
     this.position.y += this.velocity.y;
 
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0;
+    } else {
+      this.velocity.y += gravity;
     }
   }
 }
