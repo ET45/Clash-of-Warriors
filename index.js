@@ -10,16 +10,21 @@ class Sprite {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
+    this.height = 150;
   }
 
   draw() {
     ctext.fillStyle = "red";
-    ctext.fillRect(this.position.x, this.position.y, 50, 150);
+    ctext.fillRect(this.position.x, this.position.y, 50, this.height);
   }
 
   update() {
     this.draw();
-    this.position.y += 10;
+    this.position.y += this.velocity.y;
+
+    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+      this.velocity.y = 0;
+    }
   }
 }
 
@@ -30,7 +35,7 @@ const player = new Sprite({
   },
   velocity: {
     x: 0,
-    y: 0,
+    y: 10,
   },
 });
 
@@ -54,7 +59,8 @@ console.log(player);
 const animation = () => {
   window.requestAnimationFrame(animation);
   console.log("loop working?");
-  ctext.clearRect(0, 0, canvas.width, canvas.height);
+  ctext.fillStyle = "black";
+  ctext.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 };
