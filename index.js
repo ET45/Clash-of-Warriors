@@ -54,6 +54,7 @@ console.log(player);
 const animation = () => {
   window.requestAnimationFrame(animation);
   console.log("loop working?");
+  ctext.clearRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 };
