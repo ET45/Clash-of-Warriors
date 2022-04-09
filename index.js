@@ -22,6 +22,7 @@ class Sprite {
 
   update() {
     this.draw();
+    this.velocity.y += gravity;
     this.position.y += this.velocity.y;
 
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
@@ -37,7 +38,7 @@ const player = new Sprite({
   },
   velocity: {
     x: 0,
-    y: 10,
+    y: 0,
   },
 });
 
@@ -60,7 +61,7 @@ console.log(player);
 
 const animation = () => {
   window.requestAnimationFrame(animation);
-  console.log("loop working?");
+  /* console.log("loop working?"); */
   ctext.fillStyle = "black";
   ctext.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
