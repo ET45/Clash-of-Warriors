@@ -60,7 +60,16 @@ const enemy = new Sprite({
 
 /* enemy.draw(); */
 
-console.log(player);
+/* console.log(player); */
+
+const keys = {
+  a: {
+    pressed: false,
+  },
+  d: {
+    pressed: false,
+  },
+};
 
 const animation = () => {
   window.requestAnimationFrame(animation);
@@ -69,6 +78,12 @@ const animation = () => {
   ctext.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
+
+  if (keys.a.pressed) {
+    player.velocity.x = -1;
+  } else if (keys.d.pressed) {
+    player.velocity.x = 1;
+  }
 };
 
 animation();
@@ -76,9 +91,29 @@ animation();
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
-      player.velocity.x = 1;
+      player.velocity.x = true;
       break;
+    case "a":
+      player.velocity.x = true;
+      break;
+    /*  case "w":
+      player.velocity.y = -10;
+      break; */
   }
   /* console.log("event works", event);
   console.log("key work", event.key); */
+});
+
+window.addEventListener("keyup", (event) => {
+  switch (event.key) {
+    case "d":
+      player.velocity.x = false;
+      break;
+    case "a":
+      player.velocity.x = false;
+      break;
+    /* case "w":
+      player.velocity.y = 0;
+      break; */
+  }
 });
