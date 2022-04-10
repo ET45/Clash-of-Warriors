@@ -16,7 +16,7 @@ class Sprite {
   }
 
   draw() {
-    ctext.fillStyle = "red";
+    ctext.fillStyle = "green";
     ctext.fillRect(this.position.x, this.position.y, 50, this.height);
   }
 
@@ -71,17 +71,21 @@ const keys = {
   },
 };
 
+let lastHit;
+
 const animation = () => {
   window.requestAnimationFrame(animation);
   /* console.log("loop working?"); */
-  ctext.fillStyle = "black";
+  ctext.fillStyle = "blue";
   ctext.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 
-  if (keys.a.pressed) {
+  player.velocity.x = 0;
+
+  if (keys.a.pressed && lastHit === "a") {
     player.velocity.x = -1;
-  } else if (keys.d.pressed) {
+  } else if (keys.d.pressed && lastHit === "d") {
     player.velocity.x = 1;
   }
 };
@@ -92,9 +96,11 @@ window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
       keys.d.pressed = true;
+      lastHit = "d";
       break;
     case "a":
       keys.a.pressed = true;
+      lastHit = "a";
       break;
   }
   /* console.log("event works", event);
