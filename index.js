@@ -6,13 +6,14 @@ canvas.height = 576;
 
 ctext.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = 0.2;
+const gravity = 0.5;
 
 class Sprite {
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
     this.height = 150;
+    this.lastHit;
   }
 
   draw() {
@@ -72,6 +73,16 @@ const keys = {
   w: {
     pressed: false,
   },
+
+  ArrowLeft: {
+    pressed: false,
+  },
+  ArrowRight: {
+    pressed: false,
+  },
+  ArrowUp: {
+    pressed: false,
+  },
 };
 
 let lastHit;
@@ -85,11 +96,17 @@ const animation = () => {
   enemy.update();
 
   player.velocity.x = 0;
+  enemy.velocity.x = 0;
 
-  if (keys.a.pressed && lastHit === "a") {
-    player.velocity.x = -1;
-  } else if (keys.d.pressed && lastHit === "d") {
-    player.velocity.x = 1;
+  if (keys.a.pressed && player.lastHit === "a") {
+    player.velocity.x = -3;
+  } else if (keys.d.pressed && player.lastHit === "d") {
+    player.velocity.x = 3;
+  }
+  if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
+    enemy.velocity.x = -3;
+  } else if (keys.ArrowRight.pressed && enemy.lastHit === "ArrowRight") {
+    enemy.velocity.x = 3;
   }
 };
 
@@ -99,14 +116,26 @@ window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
       keys.d.pressed = true;
-      lastHit = "d";
+      player.lastHit = "d";
       break;
     case "a":
       keys.a.pressed = true;
-      lastHit = "a";
+      player.lastHit = "a";
       break;
     case "w":
       player.velocity.y = -10;
+      break;
+
+    case "ArrowRight":
+      keys.ArrowRight.pressed = true;
+      enemy.lastHit = "ArrowRight";
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = true;
+      enemy.lastHit = "ArrowLeft";
+      break;
+    case "ArrowUp":
+      enemy.velocity.y = -10;
       break;
   }
   /* console.log("event works", event);
@@ -123,6 +152,18 @@ window.addEventListener("keyup", (event) => {
       break;
     case "w":
       keys.w.pressed = false;
+      break;
+  }
+
+  switch (event.key) {
+    case "ArrowRight":
+      keys.ArrowRight.pressed = false;
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = false;
+      break;
+    case "ArrowUp":
+      keys.ArrowUp.pressed = false;
       break;
   }
 });
