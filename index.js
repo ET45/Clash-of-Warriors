@@ -69,6 +69,9 @@ const keys = {
   d: {
     pressed: false,
   },
+  w: {
+    pressed: false,
+  },
 };
 
 let lastHit;
@@ -102,6 +105,9 @@ window.addEventListener("keydown", (event) => {
       keys.a.pressed = true;
       lastHit = "a";
       break;
+    case "w":
+      player.velocity.y = -10;
+      break;
   }
   /* console.log("event works", event);
   console.log("key work", event.key); */
@@ -114,6 +120,9 @@ window.addEventListener("keyup", (event) => {
       break;
     case "a":
       keys.a.pressed = false;
+      break;
+    case "w":
+      keys.w.pressed = false;
       break;
   }
 });
