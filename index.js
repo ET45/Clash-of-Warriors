@@ -12,6 +12,7 @@ class Sprite {
   constructor({ position, velocity, color = "green" }) {
     this.position = position;
     this.velocity = velocity;
+    this.width = 50;
     this.height = 150;
     this.lastHit;
     this.color = color;
@@ -24,7 +25,7 @@ class Sprite {
 
   draw() {
     ctext.fillStyle = this.color;
-    ctext.fillRect(this.position.x, this.position.y, 50, this.height);
+    ctext.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     ctext.fillStyle = "red";
     ctext.fillRect(
@@ -123,6 +124,13 @@ const animation = () => {
     enemy.velocity.x = -3;
   } else if (keys.ArrowRight.pressed && enemy.lastHit === "ArrowRight") {
     enemy.velocity.x = 3;
+  }
+
+  if (
+    player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
+    player.attackBox.position.x <= enemy.position.x + enemy.width
+  ) {
+    console.log("attack works?");
   }
 };
 
