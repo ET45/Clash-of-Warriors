@@ -9,16 +9,30 @@ ctext.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.5;
 
 class Sprite {
-  constructor({ position, velocity }) {
+  constructor({ position, velocity, color = "green" }) {
     this.position = position;
     this.velocity = velocity;
     this.height = 150;
     this.lastHit;
+    this.color = color;
+    this.attackBox = {
+      position: this.position,
+      width: 100,
+      height: 50,
+    };
   }
 
   draw() {
-    ctext.fillStyle = "green";
+    ctext.fillStyle = this.color;
     ctext.fillRect(this.position.x, this.position.y, 50, this.height);
+
+    ctext.fillStyle = "red";
+    ctext.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
   }
 
   update() {
@@ -57,6 +71,8 @@ const enemy = new Sprite({
     x: 0,
     y: 0,
   },
+
+  color: "yellow",
 });
 
 /* enemy.draw(); */
