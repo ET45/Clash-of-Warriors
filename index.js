@@ -127,6 +127,15 @@ const keys = {
 
 let lastHit;
 
+const recCollision = ({ rec1, rec2 }) => {
+  return (
+    rec1.attackBox.position.x + rec1.attackBox.width >= rec2.position.x &&
+    rec1.attackBox.position.x <= rec2.position.x + rec2.width &&
+    rec1.attackBox.position.y + rec1.attackBox.height >= rec2.position.y &&
+    rec1.attackBox.position.y <= rec2.position.y + rec2.height
+  );
+};
+
 const animation = () => {
   window.requestAnimationFrame(animation);
   /* console.log("loop working?"); */
@@ -150,14 +159,25 @@ const animation = () => {
   }
 
   if (
-    player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
-    player.attackBox.position.x <= enemy.position.x + enemy.width &&
-    player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
-    player.attackBox.position.y <= enemy.position.y + enemy.height &&
+    recCollision({
+      rec1: player,
+      rec2: enemy,
+    }) &&
     player.isAttacking
   ) {
     player.isAttacking = false;
     console.log("attack works?");
+  }
+
+  if (
+    recCollision({
+      rec1: enemy,
+      rec2: player,
+    }) &&
+    enemy.isAttacking
+  ) {
+    enemy.isAttacking = false;
+    console.log("enemy attack works?");
   }
 };
 
@@ -190,6 +210,9 @@ window.addEventListener("keydown", (event) => {
       break;
     case "ArrowUp":
       enemy.velocity.y = -10;
+      break;
+    case "ArrowDown":
+      enemy.isAttacking = true;
       break;
   }
   /* console.log("event works", event);
