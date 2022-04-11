@@ -212,7 +212,7 @@ window.addEventListener("keydown", (event) => {
       enemy.velocity.y = -10;
       break;
     case "ArrowDown":
-      enemy.isAttacking = true;
+      enemy.attack();
       break;
   }
   /* console.log("event works", event);
