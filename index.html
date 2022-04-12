@@ -1,12 +1,23 @@
 <body>
   <div style="position: relative">
-    <div style="position: absolute">
+    <div style="position: absolute; display: flex; width: 100%">
       <div
-        style="background-color: red; height: 30px; width: 100px"
+        style="background-color: red; height: 30px; width: 100%"
         class="PlayerHealth"
       ></div>
-      <div class="Time"></div>
-      <div class="EnemyHealth"></div>
+      <div
+        style="
+          background-color: yellowgreen;
+          height: 100px;
+          width: 100px;
+          flex-shrink: 0;
+        "
+        class="Time"
+      ></div>
+      <div
+        style="background-color: red; height: 30px; width: 100%"
+        class="EnemyHealth"
+      ></div>
     </div>
     <canvas></canvas>
   </div>
