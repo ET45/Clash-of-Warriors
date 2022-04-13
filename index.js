@@ -180,6 +180,8 @@ const animation = () => {
     enemy.isAttacking
   ) {
     enemy.isAttacking = false;
+    player.health -= 20;
+    document.querySelector("#playerHealth").style.width = player.health + "%";
     console.log("enemy attack works?");
   }
 };
