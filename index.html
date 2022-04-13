@@ -20,8 +20,16 @@
         style="background-color: red; height: 30px; width: 100%"
         id="PlayerHealth"
       ></div> -->
-      <div style="position: relative; height: 30px; width: 100%">
-        <div style="background-color: red; height: 30px"></div>
+      <div
+        style="
+          position: relative;
+          height: 30px;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+        "
+      >
+        <div style="background-color: red; height: 30px; width: 100%"></div>
         <div
           id="playerHealth"
           style="
@@ -30,7 +38,7 @@
             top: 0;
             right: 0;
             bottom: 0;
-            left: 0;
+            width: 100%;
           "
         ></div>
       </div>
@@ -43,15 +51,23 @@
         "
         class="Time"
       ></div>
-      <div style="position: relative; height: 30px; width: 100%">
-        <div style="background-color: red; height: 30px"></div>
+      <div
+        style="
+          position: relative;
+          height: 30px;
+          width: 100%;
+          display: flex;
+          justify-self: flex-end;
+        "
+      >
+        <div style="background-color: red; height: 30px; width: 100%"></div>
         <div
           id="enemyHealth"
           style="
             position: absolute;
             background: black;
             top: 0;
-            right: 0;
+            width: 100%;
             bottom: 0;
             left: 0;
           "
