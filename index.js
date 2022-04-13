@@ -27,6 +27,7 @@ class Sprite {
     };
 
     this.isAttacking;
+    this.health = 100;
   }
 
   draw() {
@@ -166,7 +167,9 @@ const animation = () => {
     player.isAttacking
   ) {
     player.isAttacking = false;
-    console.log("attack works?");
+    enemy.health -= 20;
+    document.querySelector("#enemyHealth").style.width = enemy.health + "%";
+    console.log("Attack works?");
   }
 
   if (
