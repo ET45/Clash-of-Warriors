@@ -144,10 +144,14 @@ const decreaseTime = () => {
     time--, (document.querySelector("#time").innerHTML = time);
   }
   if (time === 0) {
+    document.querySelector("#result").style.display = "flex";
     if (player.health === enemy.health) {
       /* console.log("draw") */
       document.querySelector("#result").innerHTML = "draw";
-      document.querySelector("#result").style.display = "flex";
+    } else if (player.health > enemy.health) {
+      document.querySelector("#result").innerHTML = "Player 1 Wins";
+    } else if (player.health < enemy.health) {
+      document.querySelector("#result").innerHTML = "Player 2 Wins";
     }
   }
 };
