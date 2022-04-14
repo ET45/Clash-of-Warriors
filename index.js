@@ -137,7 +137,8 @@ const recCollision = ({ rec1, rec2 }) => {
   );
 };
 
-const endGame = ({ player, enemy }) => {
+const endGame = ({ player, enemy, timer }) => {
+  clearTimeout(timer);
   document.querySelector("#result").style.display = "flex";
   if (player.health === enemy.health) {
     /* console.log("draw") */
@@ -150,14 +151,15 @@ const endGame = ({ player, enemy }) => {
 };
 
 let time = 10;
+let timer;
 const decreaseTime = () => {
   if (time > 0) {
-    setTimeout(decreaseTime, 1000);
+    timer = setTimeout(decreaseTime, 1000);
     time--, (document.querySelector("#time").innerHTML = time);
   }
   if (time === 0) {
     /* document.querySelector("#result").style.display = "flex"; */
-    endGame({ player, enemy });
+    endGame({ player, enemy, timer });
     /* if (player.health === enemy.health) { */
     /* console.log("draw") */
     /*  document.querySelector("#result").innerHTML = "draw";
@@ -219,7 +221,7 @@ const animation = () => {
     console.log("enemy attack works?");
   }
   if (enemy.health <= 0 || player.health <= 0) {
-    endGame({ player, enemy });
+    endGame({ player, enemy, timer });
   }
 };
 
