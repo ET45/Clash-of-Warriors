@@ -137,6 +137,16 @@ const recCollision = ({ rec1, rec2 }) => {
   );
 };
 
+let time = 10;
+const decreaseTime = () => {
+  if (time > 0) {
+    setTimeout(decreaseTime, 1000);
+    time--, (document.querySelector("#time").innerHTML = time);
+  }
+};
+
+decreaseTime();
+
 const animation = () => {
   window.requestAnimationFrame(animation);
   /* console.log("loop working?"); */
