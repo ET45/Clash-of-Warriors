@@ -143,8 +143,12 @@ const decreaseTime = () => {
     setTimeout(decreaseTime, 1000);
     time--, (document.querySelector("#time").innerHTML = time);
   }
-  if (player.health === enemy.health) {
-    console.log("draw");
+  if (time === 0) {
+    if (player.health === enemy.health) {
+      /* console.log("draw") */
+      document.querySelector("#result").innerHTML = "draw";
+      document.querySelector("#result").style.display = "flex";
+    }
   }
 };
 
