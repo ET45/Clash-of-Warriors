@@ -137,6 +137,18 @@ const recCollision = ({ rec1, rec2 }) => {
   );
 };
 
+const endGame = ({ player, enemy }) => {
+  document.querySelector("#result").style.display = "flex";
+  if (player.health === enemy.health) {
+    /* console.log("draw") */
+    document.querySelector("#result").innerHTML = "draw";
+  } else if (player.health > enemy.health) {
+    document.querySelector("#result").innerHTML = "Player 1 Wins";
+  } else if (player.health < enemy.health) {
+    document.querySelector("#result").innerHTML = "Player 2 Wins";
+  }
+};
+
 let time = 10;
 const decreaseTime = () => {
   if (time > 0) {
@@ -144,15 +156,16 @@ const decreaseTime = () => {
     time--, (document.querySelector("#time").innerHTML = time);
   }
   if (time === 0) {
-    document.querySelector("#result").style.display = "flex";
-    if (player.health === enemy.health) {
-      /* console.log("draw") */
-      document.querySelector("#result").innerHTML = "draw";
+    /* document.querySelector("#result").style.display = "flex"; */
+    endGame({ player, enemy });
+    /* if (player.health === enemy.health) { */
+    /* console.log("draw") */
+    /*  document.querySelector("#result").innerHTML = "draw";
     } else if (player.health > enemy.health) {
       document.querySelector("#result").innerHTML = "Player 1 Wins";
     } else if (player.health < enemy.health) {
       document.querySelector("#result").innerHTML = "Player 2 Wins";
-    }
+    } */
   }
 };
 
@@ -204,6 +217,9 @@ const animation = () => {
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
     console.log("enemy attack works?");
+  }
+  if (enemy.health <= 0 || player.health <= 0) {
+    endGame({ player, enemy });
   }
 };
 
