@@ -143,6 +143,9 @@ const decreaseTime = () => {
     setTimeout(decreaseTime, 1000);
     time--, (document.querySelector("#time").innerHTML = time);
   }
+  if (player.health === enemy.health) {
+    console.log("draw");
+  }
 };
 
 decreaseTime();
