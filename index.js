@@ -18,7 +18,9 @@ class Sprite {
     this.image.src = imageSrc;
   }
 
-  draw() {}
+  draw() {
+    ctext.drawImage(this.image, this.position.x, this.position.y);
+  }
 
   update() {
     this.draw();
@@ -81,6 +83,14 @@ class Fighter {
     }, 100);
   }
 }
+
+const background = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  imageSrc: "./Background.jpg",
+});
 
 const player = new Fighter({
   position: {
@@ -194,6 +204,7 @@ const animation = () => {
   /* console.log("loop working?"); */
   ctext.fillStyle = "blue";
   ctext.fillRect(0, 0, canvas.width, canvas.height);
+  background.update();
   player.update();
   enemy.update();
 
