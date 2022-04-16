@@ -42,9 +42,7 @@ class Sprite {
       this.image.height * this.scale
     );
   }
-
-  update() {
-    this.draw();
+  animationFrames() {
     this.framesElapsed++;
     if (this.framesElapsed % this.framesHold === 0) {
       if (this.framesCurrent < this.framesMax - 1) {
@@ -53,6 +51,11 @@ class Sprite {
         this.framesCurrent = 0;
       }
     }
+  }
+
+  update() {
+    this.draw();
+    this.animationFrames;
   }
 }
 
@@ -98,6 +101,8 @@ class Fighter extends Sprite {
 
   update() {
     this.draw();
+    this.animationFrames();
+
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
     /* this.velocity.y += gravity; */
