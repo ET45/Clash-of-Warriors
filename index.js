@@ -9,26 +9,63 @@ ctext.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.5;
 
 class Sprite {
-  constructor({ position, imageSrc }) {
+  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
     this.position = position;
-
     this.width = 50;
     this.height = 150;
     this.image = new Image();
     this.image.src = imageSrc;
+    this.scale = scale;
+    this.framesMax = framesMax;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 5;
   }
 
   draw() {
-    ctext.drawImage(this.image, this.position.x, this.position.y);
+    ctext.drawImage(
+      this.image,
+      this.framesCurrent * (this.image.width / this.framesMax),
+      0,
+      this.image.width / this.framesMax,
+      this.image.height,
+      this.position.x,
+      this.position.y,
+      (this.image.width / this.framesMax) * this.scale,
+      this.image.height * this.scale
+    );
   }
 
   update() {
     this.draw();
+    this.framesElapsed++;
+    if (this.framesElapsed % this.framesHold === 0) {
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++;
+      } else {
+        this.framesCurrent = 0;
+      }
+    }
   }
 }
-class Fighter {
-  constructor({ position, velocity, color = "green", offset }) {
-    this.position = position;
+
+class Fighter extends Sprite {
+  constructor({
+    position,
+    velocity,
+    color = "green",
+    offset,
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+  }) {
+    super({
+      position,
+      imageSrc,
+      scale,
+      framesMax,
+    });
+
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
@@ -46,20 +83,9 @@ class Fighter {
 
     this.isAttacking;
     this.health = 100;
-  }
-
-  draw() {
-    ctext.fillStyle = this.color;
-    ctext.fillRect(this.position.x, this.position.y, this.width, this.height);
-    if (this.isAttacking) {
-      ctext.fillStyle = "red";
-      ctext.fillRect(
-        this.attackBox.position.x,
-        this.attackBox.position.y,
-        this.attackBox.width,
-        this.attackBox.height
-      );
-    }
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 5;
   }
 
   update() {
@@ -105,6 +131,9 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: "./Sprites/Idle.png",
+  framesMax: 8,
+  scale: 2.5,
 });
 
 /* player.draw(); */
