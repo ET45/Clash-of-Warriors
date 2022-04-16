@@ -9,6 +9,22 @@ ctext.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.5;
 
 class Sprite {
+  constructor({ position, imageSrc }) {
+    this.position = position;
+
+    this.width = 50;
+    this.height = 150;
+    this.image = new Image();
+    this.image.src = imageSrc;
+  }
+
+  draw() {}
+
+  update() {
+    this.draw();
+  }
+}
+class Fighter {
   constructor({ position, velocity, color = "green", offset }) {
     this.position = position;
     this.velocity = velocity;
@@ -66,7 +82,7 @@ class Sprite {
   }
 }
 
-const player = new Sprite({
+const player = new Fighter({
   position: {
     x: 0,
     y: 0,
@@ -83,7 +99,7 @@ const player = new Sprite({
 
 /* player.draw(); */
 
-const enemy = new Sprite({
+const enemy = new Fighter({
   position: {
     x: 400,
     y: 100,
@@ -150,7 +166,7 @@ const endGame = ({ player, enemy, timer }) => {
   }
 };
 
-let time = 10;
+let time = 30;
 let timer;
 const decreaseTime = () => {
   if (time > 0) {
