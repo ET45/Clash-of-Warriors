@@ -68,6 +68,7 @@ class Fighter extends Sprite {
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
+    sprites,
   }) {
     super({
       position,
@@ -97,6 +98,7 @@ class Fighter extends Sprite {
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 5;
+    this.sprites = sprites;
   }
 
   update() {
@@ -150,6 +152,10 @@ const player = new Fighter({
   offset: {
     x: 150,
     y: 115,
+  },
+  sprites: {
+    idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
+    run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
   },
 });
 
