@@ -103,7 +103,7 @@ class Fighter extends Sprite {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-    console.log("sprites show?", this.sprites);
+    /* console.log("sprites show?", this.sprites); */
   }
 
   update() {
@@ -263,13 +263,14 @@ const animation = () => {
   ctext.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
   player.update();
-  enemy.update();
+  /*   enemy.update(); */
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
   if (keys.a.pressed && player.lastHit === "a") {
     player.velocity.x = -3;
+    player.image = player.sprites.run.image;
   } else if (keys.d.pressed && player.lastHit === "d") {
     player.velocity.x = 3;
   }
