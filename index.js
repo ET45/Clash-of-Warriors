@@ -268,6 +268,8 @@ const animation = () => {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
+  player.image = player.sprites.idle.image;
+
   if (keys.a.pressed && player.lastHit === "a") {
     player.velocity.x = -3;
     player.image = player.sprites.run.image;
