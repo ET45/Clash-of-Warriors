@@ -275,6 +275,7 @@ const animation = () => {
     player.image = player.sprites.run.image;
   } else if (keys.d.pressed && player.lastHit === "d") {
     player.velocity.x = 3;
+    player.image = player.sprites.run.image;
   }
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
     enemy.velocity.x = -3;
