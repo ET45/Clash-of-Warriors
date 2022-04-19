@@ -281,6 +281,7 @@ const animation = () => {
 
   if (player.velocity.y < 0) {
     player.image = player.sprites.jump.image;
+    player.framesMax = player.sprites.jump.framesMax;
   }
 
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
