@@ -295,14 +295,17 @@ const animation = () => {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
-  player.switchSprites("idle");
-
-  if (keys.a.pressed && player.lastHit === "a") {
+  /* player.switchSprites("idle") */ if (
+    keys.a.pressed &&
+    player.lastHit === "a"
+  ) {
     player.velocity.x = -3;
     player.switchSprites("run");
   } else if (keys.d.pressed && player.lastHit === "d") {
     player.velocity.x = 3;
     player.switchSprites("run");
+  } else {
+    player.switchSprites("idle");
   }
 
   if (player.velocity.y < 0) {
