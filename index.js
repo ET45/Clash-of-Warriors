@@ -132,12 +132,22 @@ class Fighter extends Sprite {
   switchSprites(sprite) {
     switch (sprite) {
       case "idle":
-        if (this.image !== this.sprites.idle.image)
+        if (this.image !== this.sprites.idle.image) {
           this.image = this.sprites.idle.image;
+          this.framesMax = this.sprites.idle.framesMax;
+        }
         break;
       case "run":
+        if (this.image !== this.sprites.run.image) {
+          this.image = this.sprites.run.image;
+          this.framesMax = this.sprites.run.framesMax;
+        }
         break;
       case "jump":
+        if (this.image !== this.sprites.jump.image) {
+          this.image = this.sprites.jump.image;
+          this.framesMax = this.sprites.jump.framesMax;
+        }
         break;
     }
   }
@@ -286,15 +296,14 @@ const animation = () => {
 
   if (keys.a.pressed && player.lastHit === "a") {
     player.velocity.x = -3;
-    player.image = player.sprites.run.image;
+    player.switchSprites("run");
   } else if (keys.d.pressed && player.lastHit === "d") {
     player.velocity.x = 3;
-    player.image = player.sprites.run.image;
+    player.switchSprites("run");
   }
 
   if (player.velocity.y < 0) {
-    player.image = player.sprites.jump.image;
-    player.framesMax = player.sprites.jump.framesMax;
+    player.switchSprites("jump");
   }
 
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
