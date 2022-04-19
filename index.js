@@ -161,6 +161,7 @@ const player = new Fighter({
   sprites: {
     idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
     run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
+    jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
   },
 });
 
@@ -277,6 +278,11 @@ const animation = () => {
     player.velocity.x = 3;
     player.image = player.sprites.run.image;
   }
+
+  if (player.velocity.y < 0) {
+    player.image = player.sprites.jump.image;
+  }
+
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
     enemy.velocity.x = -3;
   } else if (keys.ArrowRight.pressed && enemy.lastHit === "ArrowRight") {
