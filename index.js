@@ -152,6 +152,13 @@ class Fighter extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+      case "fall":
+        if (this.image !== this.sprites.fall.image) {
+          this.image = this.sprites.fall.image;
+          this.framesMax = this.sprites.fall.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
     }
   }
 }
@@ -188,6 +195,7 @@ const player = new Fighter({
     idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
     run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
     jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
+    fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
   },
 });
 
@@ -310,6 +318,8 @@ const animation = () => {
 
   if (player.velocity.y < 0) {
     player.switchSprites("jump");
+  } else if (player.velocity.y > 0) {
+    player.switchSprites("fall");
   }
 
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
