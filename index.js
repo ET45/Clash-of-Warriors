@@ -128,6 +128,19 @@ class Fighter extends Sprite {
       this.isAttacking = false;
     }, 100);
   }
+
+  switchSprites(sprite) {
+    switch (sprite) {
+      case "idle":
+        if (this.image !== this.sprites.idle.image)
+          this.image = this.sprites.idle.image;
+        break;
+      case "run":
+        break;
+      case "jump":
+        break;
+    }
+  }
 }
 
 const background = new Sprite({
@@ -269,7 +282,7 @@ const animation = () => {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
-  player.image = player.sprites.idle.image;
+  player.switchSprites("idle");
 
   if (keys.a.pressed && player.lastHit === "a") {
     player.velocity.x = -3;
