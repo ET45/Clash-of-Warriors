@@ -362,6 +362,12 @@ const animation = () => {
     enemy.switchSprites("idle");
   }
 
+  if (enemy.velocity.y < 0) {
+    enemy.switchSprites("jump");
+  } else if (enemy.velocity.y > 0) {
+    enemy.switchSprites("fall");
+  }
+
   if (
     recCollision({
       rec1: player,
