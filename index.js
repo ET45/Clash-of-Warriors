@@ -97,7 +97,7 @@ class Fighter extends Sprite {
     this.health = 100;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
-    this.framesHold = 5;
+    this.framesHold = 12;
     this.sprites = sprites;
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -133,7 +133,11 @@ class Fighter extends Sprite {
   }
 
   switchSprites(sprite) {
-    if (this.image === this.sprites.attack1.image) return;
+    if (
+      this.image === this.sprites.attack1.image &&
+      this.framesCurrent < this.sprites.attack1.framesMax - 1
+    )
+      return;
     switch (sprite) {
       case "idle":
         if (this.image !== this.sprites.idle.image) {
