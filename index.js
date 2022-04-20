@@ -232,6 +232,20 @@ const enemy = new Fighter({
     x: -50,
     y: 0,
   },
+  imageSrc: "./Sprites/Idle.png",
+  framesMax: 8,
+  scale: 2.5,
+  offset: {
+    x: 150,
+    y: 115,
+  },
+  sprites: {
+    idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
+    run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
+    jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
+    fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
+    attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
+  },
 });
 
 /* enemy.draw(); */
@@ -314,7 +328,7 @@ const animation = () => {
   ctext.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
   player.update();
-  /*   enemy.update(); */
+  enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
@@ -340,8 +354,12 @@ const animation = () => {
 
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
     enemy.velocity.x = -3;
+    enemy.switchSprites("run");
   } else if (keys.ArrowRight.pressed && enemy.lastHit === "ArrowRight") {
     enemy.velocity.x = 3;
+    enemy.switchSprites("run");
+  } else {
+    enemy.switchSprites("idle");
   }
 
   if (
