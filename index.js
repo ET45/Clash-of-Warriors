@@ -133,6 +133,7 @@ class Fighter extends Sprite {
   }
 
   switchSprites(sprite) {
+    if (this.image === this.sprites.attack1.image) return;
     switch (sprite) {
       case "idle":
         if (this.image !== this.sprites.idle.image) {
