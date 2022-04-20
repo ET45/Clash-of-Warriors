@@ -55,7 +55,7 @@ class Sprite {
 
   update() {
     this.draw();
-    this.animationFrames;
+    this.animationFrames();
   }
 }
 
@@ -161,6 +161,13 @@ class Fighter extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+      case "attack1":
+        if (this.image !== this.sprites.attack1.image) {
+          this.image = this.sprites.attack1.image;
+          this.framesMax = this.sprites.attack1.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
     }
   }
 }
@@ -198,6 +205,7 @@ const player = new Fighter({
     run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
     jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
     fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
+    attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
   },
 });
 
