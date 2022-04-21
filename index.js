@@ -191,7 +191,7 @@ const background = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: "./Background.jpg",
+  imageSrc: "./Backgroud222.jpg",
 });
 
 const player = new Fighter({
@@ -212,7 +212,7 @@ const player = new Fighter({
   scale: 2.5,
   offset: {
     x: 150,
-    y: 115,
+    y: 125,
   },
   sprites: {
     idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
@@ -241,11 +241,11 @@ const enemy = new Fighter({
     y: 0,
   },
   imageSrc: "./Sprites/Idle.png",
-  framesMax: 8,
+  framesMax: 10,
   scale: 2.5,
   offset: {
-    x: 150,
-    y: 105,
+    x: 160,
+    y: 115,
   },
   sprites: {
     idle: { imageSrc: "./Sprites2/Idle.png", framesMax: 10 },
