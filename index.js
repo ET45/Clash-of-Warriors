@@ -112,6 +112,14 @@ class Fighter extends Sprite {
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
+
+    ctext.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
+
     /* this.velocity.y += gravity; */
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
@@ -237,14 +245,14 @@ const enemy = new Fighter({
   scale: 2.5,
   offset: {
     x: 150,
-    y: 115,
+    y: 105,
   },
   sprites: {
-    idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
-    run: { imageSrc: "./Sprites/Run.png", framesMax: 8 },
-    jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
-    fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
-    attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
+    idle: { imageSrc: "./Sprites2/Idle.png", framesMax: 10 },
+    run: { imageSrc: "./Sprites2/Run.png", framesMax: 8 },
+    jump: { imageSrc: "./Sprites2/Jump.png", framesMax: 3 },
+    fall: { imageSrc: "./Sprites2/Fall.png", framesMax: 3 },
+    attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
   },
 });
 
