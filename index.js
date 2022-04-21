@@ -62,6 +62,7 @@ class Fighter extends Sprite {
     framesMax = 1,
     offset = { x: 0, y: 0 },
     sprites,
+    attackBox = { offset: {}, width: undefined, height: undefined },
   }) {
     super({
       position,
@@ -80,9 +81,9 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y,
       },
-      offset,
-      width: 100,
-      height: 50,
+      offset: attackBox.offset,
+      width: attackBox.width,
+      height: attackBox.height,
     };
     this.isAttacking;
     this.health = 100;
@@ -99,8 +100,16 @@ class Fighter extends Sprite {
   update() {
     this.draw();
     this.animationFrames();
+
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
+
+    ctext.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
     /* this.velocity.y += gravity; */
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
@@ -189,7 +198,7 @@ const player = new Fighter({
   scale: 2.5,
   offset: {
     x: 150,
-    y: 115,
+    y: 125,
   },
   sprites: {
     idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
@@ -197,6 +206,11 @@ const player = new Fighter({
     jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
     fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
     attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
+  },
+  attackBox: {
+    offset: { x: 0, y: 0 },
+    width: 100,
+    height: 50,
   },
 });
 /* player.draw(); */
@@ -227,6 +241,11 @@ const enemy = new Fighter({
     jump: { imageSrc: "./Sprites2/Jump.png", framesMax: 3 },
     fall: { imageSrc: "./Sprites2/Fall.png", framesMax: 3 },
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
+  },
+  attackBox: {
+    offset: { x: 0, y: 0 },
+    width: 100,
+    height: 50,
   },
 });
 /* enemy.draw(); */
