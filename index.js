@@ -102,7 +102,7 @@ class Fighter extends Sprite {
     this.animationFrames();
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-    this.attackBox.position.y = this.position.y;
+    this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
     ctext.fillRect(
       this.attackBox.position.x,
@@ -208,7 +208,7 @@ const player = new Fighter({
     attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
   },
   attackBox: {
-    offset: { x: 0, y: 0 },
+    offset: { x: 100, y: 50 },
     width: 100,
     height: 50,
   },
@@ -243,7 +243,7 @@ const enemy = new Fighter({
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
   },
   attackBox: {
-    offset: { x: 0, y: 0 },
+    offset: { x: -150, y: 50 },
     width: 100,
     height: 50,
   },
