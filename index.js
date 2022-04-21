@@ -1,13 +1,9 @@
 const canvas = document.querySelector("canvas");
 const ctext = canvas.getContext("2d");
-
 canvas.width = 1024;
 canvas.height = 576;
-
 ctext.fillRect(0, 0, canvas.width, canvas.height);
-
 const gravity = 0.5;
-
 class Sprite {
   constructor({
     position,
@@ -28,7 +24,6 @@ class Sprite {
     this.framesHold = 5;
     this.offset = offset;
   }
-
   draw() {
     ctext.drawImage(
       this.image,
@@ -52,13 +47,11 @@ class Sprite {
       }
     }
   }
-
   update() {
     this.draw();
     this.animationFrames();
   }
 }
-
 class Fighter extends Sprite {
   constructor({
     position,
@@ -69,7 +62,6 @@ class Fighter extends Sprite {
     framesMax = 1,
     offset = { x: 0, y: 0 },
     sprites,
-    attackBox = { offset: {}, width: undefined, height: undefined },
   }) {
     super({
       position,
@@ -78,10 +70,9 @@ class Fighter extends Sprite {
       framesMax,
       offset,
     });
-
     this.velocity = velocity;
-    this.width = attackBox.width;
-    this.height = attackBox.height;
+    this.width = 50;
+    this.height = 150;
     this.lastHit;
     this.color = color;
     this.attackBox = {
@@ -89,11 +80,10 @@ class Fighter extends Sprite {
         x: this.position.x,
         y: this.position.y,
       },
-      offset: attackBox.offset,
+      offset,
       width: 100,
       height: 50,
     };
-
     this.isAttacking;
     this.health = 100;
     this.framesCurrent = 0;
@@ -106,25 +96,14 @@ class Fighter extends Sprite {
     }
     /* console.log("sprites show?", this.sprites); */
   }
-
   update() {
     this.draw();
     this.animationFrames();
-
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
-
-    ctext.fillRect(
-      this.attackBox.position.x,
-      this.attackBox.position.y,
-      this.attackBox.width,
-      this.attackBox.height
-    );
-
     /* this.velocity.y += gravity; */
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
-
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0;
       this.position.y = 426;
@@ -140,7 +119,6 @@ class Fighter extends Sprite {
       this.isAttacking = false;
     }, 100);
   }
-
   switchSprites(sprite) {
     if (
       this.image === this.sprites.attack1.image &&
@@ -186,7 +164,6 @@ class Fighter extends Sprite {
     }
   }
 }
-
 const background = new Sprite({
   position: {
     x: 0,
@@ -194,7 +171,6 @@ const background = new Sprite({
   },
   imageSrc: "./Backgroud222.jpg",
 });
-
 const player = new Fighter({
   position: {
     x: 0,
@@ -213,7 +189,7 @@ const player = new Fighter({
   scale: 2.5,
   offset: {
     x: 150,
-    y: 125,
+    y: 115,
   },
   sprites: {
     idle: { imageSrc: "./Sprites/Idle.png", framesMax: 8 },
@@ -223,9 +199,7 @@ const player = new Fighter({
     attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
   },
 });
-
 /* player.draw(); */
-
 const enemy = new Fighter({
   position: {
     x: 400,
@@ -235,17 +209,16 @@ const enemy = new Fighter({
     x: 0,
     y: 0,
   },
-
   color: "yellow",
   offset: {
     x: -50,
     y: 0,
   },
-  imageSrc: "./Sprites/Idle.png",
+  imageSrc: "./Sprites2/Idle.png",
   framesMax: 10,
   scale: 2.5,
   offset: {
-    x: 160,
+    x: 150,
     y: 115,
   },
   sprites: {
@@ -256,11 +229,8 @@ const enemy = new Fighter({
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
   },
 });
-
 /* enemy.draw(); */
-
 /* console.log(player); */
-
 const keys = {
   a: {
     pressed: false,
@@ -271,7 +241,6 @@ const keys = {
   w: {
     pressed: false,
   },
-
   ArrowLeft: {
     pressed: false,
   },
@@ -282,9 +251,7 @@ const keys = {
     pressed: false,
   },
 };
-
 let lastHit;
-
 const recCollision = ({ rec1, rec2 }) => {
   return (
     rec1.attackBox.position.x + rec1.attackBox.width >= rec2.position.x &&
@@ -293,7 +260,6 @@ const recCollision = ({ rec1, rec2 }) => {
     rec1.attackBox.position.y <= rec2.position.y + rec2.height
   );
 };
-
 const endGame = ({ player, enemy, timer }) => {
   clearTimeout(timer);
   document.querySelector("#result").style.display = "flex";
@@ -306,7 +272,6 @@ const endGame = ({ player, enemy, timer }) => {
     document.querySelector("#result").innerHTML = "Player 2 Wins";
   }
 };
-
 let time = 30;
 let timer;
 const decreaseTime = () => {
@@ -327,9 +292,7 @@ const decreaseTime = () => {
     } */
   }
 };
-
 decreaseTime();
-
 const animation = () => {
   window.requestAnimationFrame(animation);
   /* console.log("loop working?"); */
@@ -338,10 +301,8 @@ const animation = () => {
   background.update();
   player.update();
   enemy.update();
-
   player.velocity.x = 0;
   enemy.velocity.x = 0;
-
   /* player.switchSprites("idle") */ if (
     keys.a.pressed &&
     player.lastHit === "a"
@@ -354,13 +315,11 @@ const animation = () => {
   } else {
     player.switchSprites("idle");
   }
-
   if (player.velocity.y < 0) {
     player.switchSprites("jump");
   } else if (player.velocity.y > 0) {
     player.switchSprites("fall");
   }
-
   if (keys.ArrowLeft.pressed && enemy.lastHit === "ArrowLeft") {
     enemy.velocity.x = -3;
     enemy.switchSprites("run");
@@ -389,7 +348,6 @@ const animation = () => {
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
     console.log("Attack works?");
   }
-
   if (
     recCollision({
       rec1: enemy,
@@ -406,9 +364,7 @@ const animation = () => {
     endGame({ player, enemy, timer });
   }
 };
-
 animation();
-
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
@@ -425,7 +381,6 @@ window.addEventListener("keydown", (event) => {
     case "s":
       player.attack();
       break;
-
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
       enemy.lastHit = "ArrowRight";
@@ -444,7 +399,6 @@ window.addEventListener("keydown", (event) => {
   /* console.log("event works", event);
   console.log("key work", event.key); */
 });
-
 window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "d":
@@ -457,7 +411,6 @@ window.addEventListener("keyup", (event) => {
       keys.w.pressed = false;
       break;
   }
-
   switch (event.key) {
     case "ArrowRight":
       keys.ArrowRight.pressed = false;
