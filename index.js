@@ -124,9 +124,6 @@ class Fighter extends Sprite {
   attack() {
     this.switchSprites("attack1");
     this.isAttacking = true;
-    setTimeout(() => {
-      this.isAttacking = false;
-    }, 100);
   }
   switchSprites(sprite) {
     if (
@@ -360,7 +357,8 @@ const animation = () => {
       rec1: player,
       rec2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.framesCurrent === 3
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
