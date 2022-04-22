@@ -126,8 +126,14 @@ class Fighter extends Sprite {
     this.isAttacking = true;
   }
   takeHit() {
-    this.switchSprites("takeHit");
+    /* this.switchSprites("takeHit"); */
     this.health -= 20;
+
+    if (this.health <= 0) {
+      this.switchSprites("death");
+    } else {
+      this.switchSprites("takeHit");
+    }
   }
 
   switchSprites(sprite) {
@@ -230,7 +236,7 @@ const player = new Fighter({
     fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
     attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
     takeHit: { imageSrc: "./Sprites/Take Hit.png", framesMax: 4 },
-    takeHit: { imageSrc: "./Sprites/Death.png", framesMax: 6 },
+    death: { imageSrc: "./Sprites/Death.png", framesMax: 6 },
   },
   attackBox: {
     offset: { x: 100, y: 50 },
@@ -267,6 +273,7 @@ const enemy = new Fighter({
     fall: { imageSrc: "./Sprites2/Fall.png", framesMax: 3 },
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
     takeHit: { imageSrc: "./Sprites2/Take hit.png", framesMax: 3 },
+    death: { imageSrc: "./Sprites2/Death.png", framesMax: 7 },
   },
   attackBox: {
     offset: { x: -100, y: 50 },
