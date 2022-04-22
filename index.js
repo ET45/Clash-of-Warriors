@@ -240,7 +240,7 @@ const enemy = new Fighter({
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
   },
   attackBox: {
-    offset: { x: -150, y: 50 },
+    offset: { x: -100, y: 50 },
     width: 100,
     height: 50,
   },
@@ -358,24 +358,32 @@ const animation = () => {
       rec2: enemy,
     }) &&
     player.isAttacking &&
-    player.framesCurrent === 3
+    player.framesCurrent === 2
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
     console.log("Attack works?");
   }
+
+  if (player.isAttacking && player.framesCurrent === 2) {
+    player.isAttacking = false;
+  }
   if (
     recCollision({
       rec1: enemy,
       rec2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.framesCurrent === 1
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
     console.log("enemy attack works?");
+  }
+  if (enemy.isAttacking && enemy.framesCurrent === 1) {
+    enemy.isAttacking = false;
   }
   if (enemy.health <= 0 || player.health <= 0) {
     endGame({ player, enemy, timer });
