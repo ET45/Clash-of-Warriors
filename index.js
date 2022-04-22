@@ -91,6 +91,7 @@ class Fighter extends Sprite {
     this.framesElapsed = 0;
     this.framesHold = 12;
     this.sprites = sprites;
+    this.dead = false;
     for (const sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
@@ -99,7 +100,7 @@ class Fighter extends Sprite {
   }
   update() {
     this.draw();
-    this.animationFrames();
+    if (!this.dead) this.animationFrames();
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
@@ -137,7 +138,11 @@ class Fighter extends Sprite {
   }
 
   switchSprites(sprite) {
-    if (this.image === this.sprites.death.image) return;
+    if (this.image === this.sprites.death.image) {
+      if (this.framesCurrent === this.sprites.death.framesMax - 1)
+        this.dead = true;
+      return;
+    }
     if (
       this.image === this.sprites.attack1.image &&
       this.framesCurrent < this.sprites.attack1.framesMax - 1
@@ -240,8 +245,8 @@ const player = new Fighter({
     death: { imageSrc: "./Sprites/Death.png", framesMax: 6 },
   },
   attackBox: {
-    offset: { x: 100, y: 50 },
-    width: 100,
+    offset: { x: 90, y: 50 },
+    width: 90,
     height: 50,
   },
 });
@@ -277,8 +282,8 @@ const enemy = new Fighter({
     death: { imageSrc: "./Sprites2/Death.png", framesMax: 7 },
   },
   attackBox: {
-    offset: { x: -100, y: 50 },
-    width: 100,
+    offset: { x: -120, y: 50 },
+    width: 120,
     height: 50,
   },
 });
