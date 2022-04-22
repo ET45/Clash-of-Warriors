@@ -1,7 +1,14 @@
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
   <style>
     * {
       box-sizing: border-box;
+      font-family: "Press Start 2P", cursive;
     }
   </style>
 </head>
@@ -29,16 +36,24 @@
           justify-content: flex-end;
         "
       >
-        <div style="background-color: red; height: 30px; width: 100%"></div>
+        <div
+          style="
+            background-color: red;
+            height: 30px;
+            width: 100%;
+            border: 4px solid white;
+          "
+        ></div>
         <div
           id="playerHealth"
           style="
             position: absolute;
-            background: black;
+            background: #86efac;
             top: 0;
             right: 0;
             bottom: 0;
             width: 100%;
+            border: 4px solid white;
           "
         ></div>
       </div>
@@ -46,11 +61,12 @@
         style="
           display: flex;
           background-color: yellowgreen;
-          height: 100px;
-          width: 100px;
+          height: 40px;
+          width: 50px;
           flex-shrink: 0;
           align-items: center;
           justify-content: center;
+          border: 2px solid black;
         "
         id="time"
       >
@@ -65,16 +81,24 @@
           justify-self: flex-end;
         "
       >
-        <div style="background-color: red; height: 30px; width: 100%"></div>
+        <div
+          style="
+            background-color: red;
+            height: 30px;
+            width: 100%;
+            border: 4px solid white;
+          "
+        ></div>
         <div
           id="enemyHealth"
           style="
             position: absolute;
-            background: black;
+            background: #86efac;
             top: 0;
             width: 100%;
             bottom: 0;
             left: 0;
+            border: 4px solid white;
           "
         ></div>
       </div>
