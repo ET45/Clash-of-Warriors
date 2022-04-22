@@ -125,6 +125,10 @@ class Fighter extends Sprite {
     this.switchSprites("attack1");
     this.isAttacking = true;
   }
+  takeHit() {
+    this.health -= 20;
+  }
+
   switchSprites(sprite) {
     if (
       this.image === this.sprites.attack1.image &&
@@ -167,6 +171,13 @@ class Fighter extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+      case "takeHit":
+        if (this.image !== this.sprites.takeHit.image) {
+          this.image = this.sprites.takeHit.image;
+          this.framesMax = this.sprites.takeHit.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
     }
   }
 }
@@ -203,6 +214,7 @@ const player = new Fighter({
     jump: { imageSrc: "./Sprites/Jump.png", framesMax: 2 },
     fall: { imageSrc: "./Sprites/Fall.png", framesMax: 2 },
     attack1: { imageSrc: "./Sprites/Attack1.png", framesMax: 4 },
+    takeHit: { imageSrc: "./Sprites/Take hit.png", framesMax: 4 },
   },
   attackBox: {
     offset: { x: 100, y: 50 },
@@ -238,6 +250,7 @@ const enemy = new Fighter({
     jump: { imageSrc: "./Sprites2/Jump.png", framesMax: 3 },
     fall: { imageSrc: "./Sprites2/Fall.png", framesMax: 3 },
     attack1: { imageSrc: "./Sprites2/Attack1.png", framesMax: 7 },
+    takeHit: { imageSrc: "./Sprites2/Take hit.png", framesMax: 3 },
   },
   attackBox: {
     offset: { x: -100, y: 50 },
@@ -360,8 +373,9 @@ const animation = () => {
     player.isAttacking &&
     player.framesCurrent === 2
   ) {
+    enemy.takeHit();
     player.isAttacking = false;
-    enemy.health -= 20;
+
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
     console.log("Attack works?");
   }
@@ -377,8 +391,9 @@ const animation = () => {
     enemy.isAttacking &&
     enemy.framesCurrent === 1
   ) {
+    player.takeHit();
     enemy.isAttacking = false;
-    player.health -= 20;
+
     document.querySelector("#playerHealth").style.width = player.health + "%";
     console.log("enemy attack works?");
   }
