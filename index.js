@@ -435,35 +435,42 @@ const animation = () => {
 };
 animation();
 window.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "d":
-      keys.d.pressed = true;
-      player.lastHit = "d";
-      break;
-    case "a":
-      keys.a.pressed = true;
-      player.lastHit = "a";
-      break;
-    case "w":
-      player.velocity.y = -10;
-      break;
-    case "s":
-      player.attack();
-      break;
-    case "ArrowRight":
-      keys.ArrowRight.pressed = true;
-      enemy.lastHit = "ArrowRight";
-      break;
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = true;
-      enemy.lastHit = "ArrowLeft";
-      break;
-    case "ArrowUp":
-      enemy.velocity.y = -10;
-      break;
-    case "ArrowDown":
-      enemy.attack();
-      break;
+  if (!player.dead) {
+    switch (event.key) {
+      case "d":
+        keys.d.pressed = true;
+        player.lastHit = "d";
+        break;
+      case "a":
+        keys.a.pressed = true;
+        player.lastHit = "a";
+        break;
+      case "w":
+        player.velocity.y = -10;
+        break;
+      case "s":
+        player.attack();
+        break;
+    }
+  }
+
+  if (!enemy.dead) {
+    switch (event.key) {
+      case "ArrowRight":
+        keys.ArrowRight.pressed = true;
+        enemy.lastHit = "ArrowRight";
+        break;
+      case "ArrowLeft":
+        keys.ArrowLeft.pressed = true;
+        enemy.lastHit = "ArrowLeft";
+        break;
+      case "ArrowUp":
+        enemy.velocity.y = -10;
+        break;
+      case "ArrowDown":
+        enemy.attack();
+        break;
+    }
   }
   /* console.log("event works", event);
   console.log("key work", event.key); */
