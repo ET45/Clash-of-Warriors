@@ -253,7 +253,7 @@ const player = new Fighter({
 /* player.draw(); */
 const enemy = new Fighter({
   position: {
-    x: 630,
+    x: 60,
     y: 100,
   },
   velocity: {
@@ -501,3 +501,14 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+(function () {
+  firebase
+    .auth()
+    .signInAnonymously()
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+})();
