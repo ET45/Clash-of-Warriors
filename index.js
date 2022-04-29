@@ -505,6 +505,9 @@ window.addEventListener("keyup", (event) => {
 (function () {
   firebase.auth().onAuthStateChnaged((user) => {
     console.log(user);
+    if (user) {
+    } else {
+    }
   });
   firebase
     .auth()
