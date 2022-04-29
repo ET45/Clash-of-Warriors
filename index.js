@@ -503,6 +503,9 @@ window.addEventListener("keyup", (event) => {
 });
 
 (function () {
+  firebase.auth().onAuthStateChnaged((user) => {
+    console.log(user);
+  });
   firebase
     .auth()
     .signInAnonymously()
